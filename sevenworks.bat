@@ -1,29 +1,20 @@
 @echo off
-if not "%%1"=="" (
-    if "%%1"=="sevenworks://client/" (
-        "C:\.sevenworks\sevenworks.exe"
-    ) else if "%%1"=="sevenworks://auth/" (
-        "C:\.sevenworks\sevenworks.exe" auth
-    ) else if "%%1"=="sevenworks://test/" (
-        "C:\.sevenworks\sevenworks.exe" test
-    ) else if "%%1"=="sevenworks://dashboard/" (
-        explorer "https://sevenworks.eu.org/network/dashboard.php"
-    ) else if "%%1"=="sevenworks://developers/" (
-        explorer "https://sevenworks.eu.org/network/developers/"
-    ) else if "%%1"=="sevenworks:client/" (
-        "C:\.sevenworks\sevenworks.exe"
-    ) else if "%%1"=="sevenworks:auth/" (
-        "C:\.sevenworks\sevenworks.exe" auth
-    ) else if "%%1"=="sevenworks:test/" (
-        "C:\.sevenworks\sevenworks.exe" test
-    ) else if "%%1"=="sevenworks:dashboard/" (
-        explorer "https://sevenworks.eu.org/network/dashboard.php"
-    ) else if "%%1"=="sevenworks:developers/" (
-        explorer "https://sevenworks.eu.org/network/developers/"
-    ) else (
-        echo valid links: client, dashboard, developers, auth, test
+set "lmao=auth client test dashboard developers"
+
+if not "%1"=="" (
+    for %%i in (%keywords%) do (
+        echo %1 | find /i "sevenworks://%%i" > nul && (
+            if "%%i"=="dashboard" (
+                explorer "https://sevenworks.eu.org/network/dashboard.php"
+            ) else if "%%i"=="developers" (
+                explorer "https://sevenworks.eu.org/network/developers/"
+            ) else (
+                "C:\.sevenworks\sevenworks.exe" %%i
+            )
+            exit /b
+        )
     )
+    echo valid links: %lmao%
 ) else (
     echo what
 )
-pause
