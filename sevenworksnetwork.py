@@ -61,7 +61,7 @@ def snget(package_name):
         print(f"Downloading {package_name}")
         req = requests.get(f"https://raw.githubusercontent.com/SevenworksDev/sevenworksnetwork/main/packages/{package_name}.exe")
         req.raise_for_status()
-        with open(os.path.join("C:\\", ".sevenworks", "packages", package_name)+".scr", "wb") as file: file.write(response.content)
+        with open(os.path.join("C:\\", ".sevenworks", "packages", package_name)+".exe", "wb") as file: file.write(response.content)
         print(f"{package_name} is now installed.")
     except requests.exceptions.RequestException as e:
         print(f"{package_name} doesn't exist or a serious error occurred.")
